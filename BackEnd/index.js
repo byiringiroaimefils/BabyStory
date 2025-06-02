@@ -34,7 +34,7 @@ app.use(cors({
 
 
 App.use(express.json());
-App.use(cors(corsOptions));
+App.use(cors(allowedOrigins));
 
 
 // --Connection of DataBase--
