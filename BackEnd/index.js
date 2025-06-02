@@ -13,11 +13,26 @@ const ProverbSchema = require('./Modules/ProverbSchema');
 const BiblicalSchema = require('./Modules/BiblicalSchema.js');
 
 //----MiddleWare configurations---
-const corsOptions = {
-  origin: process.env.FRONTEND_URL || "https://isomere.vercel.app",
-  credentials: true,
-  optionsSuccessStatus: 200
-}
+// const corsOptions = {
+//   origin: process.env.FRONTEND_URL || "https://isomere.vercel.app",
+//   credentials: true,
+//   optionsSuccessStatus: 200
+// }
+
+
+const allowedOrigins = ['https://isomere.vercel.app'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
+
+
 App.use(express.json());
 App.use(cors(corsOptions));
 
